@@ -11,11 +11,11 @@
 
 \author{Argo Saakyan}
 \affiliation{%
-\institution{TODO affiliation}
-\city{TODO city}
-\country{TODO country}
+\institution{Agnify}
+\city{Valencia}
+\country{Spain}
 }
-\email{TODO@email}
+\email{argo.cve@gmail.com}
 
 \begin{abstract}
 We segment solar filaments in full-disk GONG H$\alpha$ observations with a single small real-time network: a D-FINE-seg-S semantic segmentation model (8M parameters) applied once to the native $2048{\times}2048$ frame. Filament instances are the connected components of its probability map, and each is kept only if its mean probability is high, because Panoptic Quality (PQ) penalises a false positive twice as much as a miss. Scored against every annotator separately, the pipeline reaches PQ 0.429 on 144 held-out observations, against 0.334 for annotators scored against each other on the same observations, and it agrees with the annotators better than they agree with each other on every metric of the challenge rubric. The public leaderboard score is 0.38. End to end, from JPEG to final masks, it takes 76\,ms per image on a consumer GPU with plain PyTorch and 1.5\,GB of GPU memory. Input resolution was the one change that mattered (+0.057 PQ); larger models, instance segmentation, tiling, fusion, label variants, input preprocessing and test-time augmentation improved validation PQ by at most 0.005, at up to 20$\times$ the network time.
