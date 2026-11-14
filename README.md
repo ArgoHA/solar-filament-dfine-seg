@@ -20,11 +20,11 @@ filtered by their mean confidence, are the filament instances.
 | **end-to-end latency** | **76 ms / image** | | |
 
 Latency: JPEG path -> final non-overlapping RLEs, batch 1, PyTorch, RTX 5070 Ti (16 GB):
-decode 11 ms + network 57 ms + post-processing 9 ms. Peak GPU memory 1.5 GB. The full test set
-(180 images) takes 14 s including model loading.
+decode 11 ms + network 57 ms + post-processing 9 ms. Peak allocated GPU memory 1.5 GB (2.1 GB
+reserved). The full test set (180 images) takes about 15 s including model loading.
 
-The model is scored against each annotator separately, and it agrees with them better than
-they agree with each other on every metric of the rubric.
+The model is scored against each annotator separately. It agrees with them better than they
+agree with each other on PQ, SQ, RQ and Dice, with fragmentation and merging close to theirs.
 
 ## Reproduce
 
@@ -69,8 +69,8 @@ COCO-pretrained D-FINE-seg weights download automatically from the Hugging Face 
    5-15 px wide, so resolution was the largest gain (1280 -> 2048: +0.057 PQ).
    60 epochs, batch 2, flips and 90-degree rotations, EMA, bf16 AMP (`configs/config.yaml`).
 3. **Instances.** p(filament) >= 0.4 -> closing (disk r = 4 px) -> 8-connected components
-   >= 200 px -> keep a component if its mean probability >= 0.90. PQ charges a false positive
-   twice what it charges a miss, and the confidence cut adds +0.010 PQ (paired bootstrap 95% CI
+   >= 200 px -> keep a component if its mean probability >= 0.90. An unmatched prediction still
+   counts in PQ's denominator, so uncertain components cost more than they bring; the cut adds +0.010 PQ (paired bootstrap 95% CI
    [+0.005, +0.015], confirmed with split-half cross-fitting). Components never overlap.
 
 Everything else we tried (instance segmentation, tiles, fusion, larger models, input

@@ -8,8 +8,9 @@ frame. Instances come from the probability map:
    one filament into several pieces;
 3. 8-connected components are the instances (`min_area` drops specks);
 4. each component is scored by its mean probability and kept if the score >= `min_score`.
-   Panoptic Quality charges a false positive 1.0 in the denominator and a miss only 0.5,
-   so dropping uncertain components pays off (+0.010 PQ on validation).
+   An emitted component adds 1/2 to PQ's denominator whether it matches or not, and its
+   IoU to the numerator only if it matches, so it pays off only if P(match) > PQ / (2 SQ),
+   about 1/3 here. Dropping uncertain components adds +0.010 PQ on validation.
 
 Components never overlap, so the output is a valid Kaggle submission as is.
 """

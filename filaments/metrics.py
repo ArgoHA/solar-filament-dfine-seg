@@ -9,7 +9,7 @@ the counts are pooled over all (observation, view) pairs:
 * Instance Dice / IoU distributions: of every matched pair, and the best IoU of every
   ground-truth filament (0 when nothing overlaps it).
 * Image Dice: binary Dice of the union of predicted masks vs the union of the view's masks
-  (torchmetrics' DiceScore on the filament class, one value per view).
+  (the filament class; one value per view, views where both are empty are skipped).
 * One-to-many: ground-truth filaments overlapped (IoU > 0) by more than one prediction
   (fragmentation). Many-to-one: predictions overlapping more than one ground-truth filament
   (over-merging).

@@ -1,4 +1,5 @@
-# Training config of the submitted model (D-FINE-seg 0.7.1 template + the settings below).
+# Training config of the submitted model: D-FINE-seg 0.7.1 template with the run's settings
+# (the submitted model was trained with D-FINE-seg 0.6.1).
 # Run from the repo root: DFINE_SEG_CONFIG_DIR=configs dfine train
 # Default D-FINE-seg config, emitted by `dfine-seg init`
 # Edit train.root, train.label_to_name and task
